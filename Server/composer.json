@@ -66,9 +66,9 @@
     },
 
     "repositories": {
-        "klejdis/core-module": {
-            "type": "vcs",
-            "url": "git@github.com:klejdis/lb-core-module.git"
+        "klejdis/lb-core-module": {
+            "type": "path",
+            "url": "/Users/klejdisjorgji/Documents/GitHub/laravel-angular-boilerplate/Modules/lb-core-module"
         }
     },
     "minimum-stability": "dev",
