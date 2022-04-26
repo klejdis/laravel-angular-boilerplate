@@ -67,8 +67,8 @@
 
     "repositories": {
         "klejdis/lb-core-module": {
-            "type": "vcs",
-            "url": "git@github.com:klejdis/lb-core-module.git"
+            "type": "path",
+            "url": "/var/www/html/Packages/lb-core-module"
         }
     },
     "minimum-stability": "dev",
