@@ -1,4 +1,4 @@
-import { Component} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
   selector: 'users-list',
@@ -6,6 +6,9 @@ import { Component} from "@angular/core";
   styleUrls: ['./users.component.scss']
 
 })
-export class UsersComponent{
+export class UsersComponent implements OnInit{
 
+  ngOnInit() {
+
+  }
 }
