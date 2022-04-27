@@ -122,6 +122,7 @@
       <excludeFolder url="file://$MODULE_DIR$/Server/vendor/nunomaduro/collision" />
       <excludeFolder url="file://$MODULE_DIR$/Server/vendor/spatie/laravel-ignition" />
       <excludeFolder url="file://$MODULE_DIR$/Server/vendor/guzzlehttp/guzzle" />
+      <excludeFolder url="file://$MODULE_DIR$/Server/vendor/laracasts/presenter" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,19 +1,6 @@
 
 
-<div>
-  <button (click)="handleClick(username_ref.value)">
-    get value
-  </button>
 
-  <input type="text"
-         #username_ref
-
-         [(ngModel)]="username"
-  >
-
-  <div *ngIf="username.length">
-      searching ... {{username}}
-  </div>
-</div>
+<users-list></users-list>
 
 <router-outlet></router-outlet>
