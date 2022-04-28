@@ -1,20 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { IconSetService } from '@coreui/icons-angular';
+import { iconSubset } from './icons/icon-subset';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
-  selector: 'app-root',
+  // tslint:disable-next-line:component-selector
+  selector: 'body',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  username = '';
+export class AppComponent implements OnInit {
+  title = 'CoreUI Free Angular Admin Template';
 
-  handleClick(value: string){
-    console.log(value);
+  constructor(
+    private router: Router,
+    private titleService: Title,
+    private iconSetService: IconSetService
+  ) {
+    titleService.setTitle(this.title);
+    // iconSet singleton
+    iconSetService.icons = { ...iconSubset };
   }
 
-  handleInput(val: any){
-     this.username = val.target.value;
+  ngOnInit(): void {
+    this.router.events.subscribe((evt) => {
+      if (!(evt instanceof NavigationEnd)) {
+        return;
+      }
+    });
   }
-
 }
