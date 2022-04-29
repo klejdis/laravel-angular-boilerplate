@@ -11,7 +11,7 @@ import { Title } from '@angular/platform-browser';
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  title = 'CoreUI Free Angular Admin Template';
+  title = 'Admin Template';
 
   constructor(
     private router: Router,

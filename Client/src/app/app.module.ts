@@ -56,8 +56,6 @@ const APP_CONTAINERS = [
   DefaultLayoutComponent,
 ];
 
-import { UsersModule} from "./modules/users/users.module";
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,7 +89,6 @@ import { UsersModule} from "./modules/users/users.module";
     BadgeModule,
     ListGroupModule,
     CardModule,
-    UsersModule
   ],
   providers: [
     {
