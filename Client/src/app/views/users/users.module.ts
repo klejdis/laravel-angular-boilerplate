@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AgGridModule} from "ag-grid-angular";
 
 // CoreUI Modules
 import {
@@ -39,6 +40,7 @@ import {UsersComponent} from "./index/users.component";
 // Components Routing
 import { UsersRoutingModule } from './users-routing.module';
 import {BaseRoutingModule} from "../base/base-routing.module";
+import {UsersService} from "./users.service";
 
 @NgModule({
   imports: [
@@ -71,9 +73,13 @@ import {BaseRoutingModule} from "../base/base-routing.module";
     PopoverModule,
     TableModule,
     DocsComponentsModule,
+    AgGridModule
   ],
   declarations: [
     UsersComponent
   ],
+  providers: [
+    UsersService
+  ]
 })
 export class UsersModule {}

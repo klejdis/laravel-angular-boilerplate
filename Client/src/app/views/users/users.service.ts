@@ -9,7 +9,7 @@ export class UsersService{
   constructor(private http: HttpClient) {
   }
 
-  getUsers(){
-    return this.http.get('http://localhost/api/users');
+  getUsers(page: number){
+    return this.http.get('http://localhost/api/users?page=' + page);
   }
 }
