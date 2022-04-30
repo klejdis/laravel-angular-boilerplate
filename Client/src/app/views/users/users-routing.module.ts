@@ -19,7 +19,7 @@ const routes: Routes = [
         path: 'index',
         component: UsersComponent,
         data: {
-          title: 'Users',
+          title: 'List',
         },
       },
       {
