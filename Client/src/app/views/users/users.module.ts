@@ -41,6 +41,7 @@ import {UsersComponent} from "./index/users.component";
 import { UsersRoutingModule } from './users-routing.module';
 import {BaseRoutingModule} from "../base/base-routing.module";
 import {UsersService} from "./users.service";
+import { CreateComponent } from './create/create.component';
 
 @NgModule({
   imports: [
@@ -76,7 +77,8 @@ import {UsersService} from "./users.service";
     AgGridModule
   ],
   declarations: [
-    UsersComponent
+    UsersComponent,
+    CreateComponent
   ],
   providers: [
     UsersService

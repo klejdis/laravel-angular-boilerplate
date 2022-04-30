@@ -1,11 +1,16 @@
 <div class="fade-in">
-  <c-row ngPreserveWhitespaces>
-    <c-col xs="12">
-    </c-col>
-    <c-col class="mb-4" xs="12">
+  <c-row ngPreserveWhitespace [gutter]="{gy: 2}">
+    <c-col class="d-flex justify-content-end" xs="12">
 
+      <a cButton class="me-1" color="primary" variant="outline" routerLink="/users/create">
+        Create User
+      </a>
+
+    </c-col>
+
+    <c-col xs="12">
       <ag-grid-angular
-        style="width: 100%; height: 80vh;"
+        style="width: 100%; height: 70vh;"
         class="ag-theme-alpine"
         [columnDefs]="columnDefs"
         [defaultColDef]="defaultColDef"
@@ -18,7 +23,7 @@
         [rowData]="rowData"
         (gridReady)="onGridReady($event)"
       ></ag-grid-angular>
-
     </c-col>
+
   </c-row>
 </div>

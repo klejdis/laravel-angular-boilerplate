@@ -31,8 +31,8 @@ import {GridApi} from "ag-grid-community/dist/lib/gridApi";
 export class UsersComponent implements OnInit {
 
   public columnDefs: ColDef[] = [
-    { field: 'id' },
-    { field: 'first_name' },
+    { field: 'id', headerName: 'Id' },
+    { field: 'first_name', headerName: 'First Name' },
     { field: 'last_name' },
     { field: 'fullname'},
     { field: 'email'},
