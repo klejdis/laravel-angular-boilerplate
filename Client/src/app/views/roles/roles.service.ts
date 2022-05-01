@@ -4,16 +4,13 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry, map } from 'rxjs/operators';
 
 @Injectable()
-export class UsersService{
+export class RolesService{
 
   constructor(private http: HttpClient) {
   }
 
-  getUsers(page: number){
-    return this.http.get('http://localhost/api/users?page=' + page);
+  getRoles(page: number){
+    return this.http.get('http://localhost/api/roles?page=' + page);
   }
 
-  storeUser(user: any): Observable<any> | void | null{
-    return this.http.post('http://localhost/api/users/store',user);
-  }
 }

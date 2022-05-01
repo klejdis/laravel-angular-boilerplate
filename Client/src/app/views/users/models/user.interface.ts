@@ -5,5 +5,6 @@ export interface User{
   password: string
   roles: Array<any>
   permissions: Array<any>
+  is_activated: boolean
 
 }

@@ -33,10 +33,9 @@ export class UsersComponent implements OnInit {
   public columnDefs: ColDef[] = [
     { field: 'id', headerName: 'Id' },
     { field: 'first_name', headerName: 'First Name' },
-    { field: 'last_name' },
-    { field: 'fullname'},
-    { field: 'email'},
-    { field: 'created_at'},
+    { field: 'last_name',headerName: 'Last Name' },
+    { field: 'email', headerName: 'Email'},
+    { field: 'created_at', headerName: 'Created At'},
   ];
 
   public defaultColDef: ColDef = {

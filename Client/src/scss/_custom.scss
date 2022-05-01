@@ -1,11 +1,9 @@
 // Here you can add other styles
 
 .validate-when-touched{
-  &.ng-untouched{
-    .ng-invalid{
-      border-color: inherit;
-      background-image: inherit;
-    }
+  .ng-untouched.ng-invalid{
+    border-color: inherit;
+    background-image: inherit;
   }
 }
 
@@ -15,5 +13,15 @@
     background-image: inherit;
     outline: 0;
     box-shadow: none;
+    color: var(--cui-body-color);
   }
+
+  .form-check-input.ng-valid ~ .form-check-label{
+    color: inherit;
+  }
+
+  .form-check-input.ng-valid:checked{
+    background-color: var(--cui-form-check-input-checked-bg-color, #321fdb);
+  }
+
 }

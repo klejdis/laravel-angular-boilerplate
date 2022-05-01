@@ -5,17 +5,11 @@
 
   <c-card-body>
     <form
-      cForm
-      cRow
       class="row g-3 validate-when-touched show-only-errors"
       novalidate
       (ngSubmit)="onSubmit()"
       [formGroup]="createUserForm"
     >
-
-      {{ createUserForm.value | json}}
-      {{ createUserForm.valid | json}}
-      {{ createUserForm.dirty | json}}
 
     <c-row class="g-3">
 
@@ -27,8 +21,7 @@
                placeholder="First name"
                name="first_name"
                type="text"
-               formControlName="firstName"
-               [ngClass]="{'ng-invalid': false}"
+               formControlName="first_name"
         />
       </c-col>
 
@@ -37,12 +30,16 @@
 
         <input aria-label="Last name"
                cFormControl
-               placeholder="Last name" />
+               placeholder="Last name"
+               formControlName="last_name"
+        />
       </c-col>
 
       <c-col [xs]="6">
         <label cLabel >Email</label>
-        <input aria-label="Email" cFormControl placeholder="Email" />
+        <input aria-label="Email" cFormControl placeholder="Email"
+               formControlName="email"
+        />
       </c-col>
 
       <c-col [xs]="6">
@@ -50,7 +47,7 @@
 
         <div cFormControl>
           <c-form-check [switch]="true">
-            <input cFormCheckInput type="checkbox" [checked]="true" />
+            <input cFormCheckInput type="checkbox" formControlName="is_activated"  [checked]="true" />
             <label cFormCheckLabel> if checked user will be able to login</label>
           </c-form-check>
         </div>
@@ -59,12 +56,16 @@
 
       <c-col [xs]="6">
         <label cLabel>Password</label>
-        <input cFormControl type="password" placeholder="Password" >
+        <input cFormControl type="password" placeholder="Password"
+               formControlName="password"
+        >
       </c-col>
 
       <c-col [xs]="6">
         <label cLabel>Password Confirmation</label>
-        <input cFormControl type="password" placeholder="Password Confirmation" >
+        <input cFormControl type="password"
+               formControlName="password_confirmation"
+               placeholder="Password Confirmation" >
       </c-col>
 
 
