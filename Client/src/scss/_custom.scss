@@ -1,2 +1,19 @@
 // Here you can add other styles
 
+.validate-when-touched{
+  &.ng-untouched{
+    .ng-invalid{
+      border-color: inherit;
+      background-image: inherit;
+    }
+  }
+}
+
+.show-only-errors{
+  .ng-valid, .form-control:valid:focus, .form-control.is-valid:focus, .form-control.ng-valid:focus{
+    border: $input-border-width solid var(--#{$variable-prefix}input-border-color, $input-border-color);
+    background-image: inherit;
+    outline: 0;
+    box-shadow: none;
+  }
+}

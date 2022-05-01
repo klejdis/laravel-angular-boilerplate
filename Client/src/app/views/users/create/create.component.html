@@ -4,30 +4,74 @@
   </c-card-header>
 
   <c-card-body>
+    <form
+      cForm
+      cRow
+      class="row g-3 validate-when-touched show-only-errors"
+      novalidate
+      (ngSubmit)="onSubmit()"
+      [formGroup]="createUserForm"
+    >
+
+      {{ createUserForm.value | json}}
+      {{ createUserForm.valid | json}}
+      {{ createUserForm.dirty | json}}
 
     <c-row class="g-3">
-      <c-col [xs]="6">
-        <label cLabel for="">First Name</label>
 
-        <input aria-label="First name" cFormControl placeholder="First name" />
+      <c-col [xs]="6">
+        <label cLabel >First Name</label>
+
+        <input aria-label="First name"
+               cFormControl
+               placeholder="First name"
+               name="first_name"
+               type="text"
+               formControlName="firstName"
+               [ngClass]="{'ng-invalid': false}"
+        />
       </c-col>
 
       <c-col [xs]="6">
-        <label cLabel for="">Last Name</label>
+        <label cLabel >Last Name</label>
 
-        <input aria-label="Last name" cFormControl placeholder="Last name" />
+        <input aria-label="Last name"
+               cFormControl
+               placeholder="Last name" />
       </c-col>
 
       <c-col [xs]="6">
-        <label cLabel for="">Email</label>
-
+        <label cLabel >Email</label>
         <input aria-label="Email" cFormControl placeholder="Email" />
       </c-col>
 
+      <c-col [xs]="6">
+        <label cLabel >Activate</label>
+
+        <div cFormControl>
+          <c-form-check [switch]="true">
+            <input cFormCheckInput type="checkbox" [checked]="true" />
+            <label cFormCheckLabel> if checked user will be able to login</label>
+          </c-form-check>
+        </div>
+
+      </c-col>
+
+      <c-col [xs]="6">
+        <label cLabel>Password</label>
+        <input cFormControl type="password" placeholder="Password" >
+      </c-col>
+
+      <c-col [xs]="6">
+        <label cLabel>Password Confirmation</label>
+        <input cFormControl type="password" placeholder="Password Confirmation" >
+      </c-col>
+
+
       <c-col [xs]="12" class="d-flex justify-content-end">
-        <button cButton type="submit">Submit</button>
+        <button cButton type="submit" [disabled]="!createUserForm.valid">Submit</button>
       </c-col>
     </c-row>
-
+    </form>
   </c-card-body>
 </c-card>

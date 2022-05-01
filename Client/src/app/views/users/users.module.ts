@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule as FM } from '@angular/forms';
 import { AgGridModule} from "ag-grid-angular";
 
 // CoreUI Modules
@@ -74,7 +75,8 @@ import { CreateComponent } from './create/create.component';
     PopoverModule,
     TableModule,
     DocsComponentsModule,
-    AgGridModule
+    AgGridModule,
+    FM
   ],
   declarations: [
     UsersComponent,

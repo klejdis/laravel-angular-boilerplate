@@ -11,6 +11,8 @@ export class ValidationComponent implements OnInit {
   browserDefaultsValidated = false;
   tooltipValidated = false;
 
+  model: any = {};
+
   constructor() { }
 
   ngOnInit(): void { }
