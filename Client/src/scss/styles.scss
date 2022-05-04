@@ -25,6 +25,12 @@ $enable-rtl: true;
 @import "ag-grid-community/dist/styles/ag-grid.css";
 @import "ag-grid-community/dist/styles/ag-theme-alpine.css";
 
+//ng select
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+//toastr
+@import "ngx-toastr/toastr.css";
+
 // If you want to add something do it here
 @import "custom";
 

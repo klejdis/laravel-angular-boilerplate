@@ -68,6 +68,20 @@
                placeholder="Password Confirmation" >
       </c-col>
 
+      <c-col [xs]="6">
+        <label cLabel>Roles</label>
+        <ng-select [items]="roles"
+                   bindLabel="name"
+                   bindValue="id"
+                   formControlName="roles"
+                   [multiple]="true"
+                   appendTo="body"
+        >
+        </ng-select>
+      </c-col>
+
+
+
 
       <c-col [xs]="12" class="d-flex justify-content-end">
         <button cButton type="submit" [disabled]="!createUserForm.valid">Submit</button>

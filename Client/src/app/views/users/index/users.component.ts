@@ -75,7 +75,6 @@ export class UsersComponent implements OnInit {
           // get data for request from server
           this.userService.getUsers(this.gridApi.paginationGetCurrentPage() + 1)
             .subscribe((data:any) => {
-              console.dir(data.data);
               params.successCallback( data.data, data.meta.total );
             });
         }

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule as FM } from '@angular/forms';
 import { AgGridModule} from "ag-grid-angular";
+import { NgSelectModule} from "@ng-select/ng-select";
 
 // CoreUI Modules
 import {
@@ -76,7 +77,8 @@ import { CreateComponent } from './create/create.component';
     TableModule,
     DocsComponentsModule,
     AgGridModule,
-    FM
+    FM,
+    NgSelectModule
   ],
   declarations: [
     UsersComponent,

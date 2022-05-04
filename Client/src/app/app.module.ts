@@ -4,9 +4,13 @@ import {FormsModule} from "@angular/forms";
 import { HttpClientModule} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { ToastrModule} from "ngx-toastr";
+
 
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule} from "@angular/platform-browser/animations";
 import { ReactiveFormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
 
@@ -66,6 +70,8 @@ const APP_CONTAINERS = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
@@ -92,7 +98,9 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     CardModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    NgSelectModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {
