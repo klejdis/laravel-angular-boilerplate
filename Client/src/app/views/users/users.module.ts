@@ -44,6 +44,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import {BaseRoutingModule} from "../base/base-routing.module";
 import {UsersService} from "./users.service";
 import { CreateComponent } from './create/create.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   imports: [
@@ -82,7 +83,8 @@ import { CreateComponent } from './create/create.component';
   ],
   declarations: [
     UsersComponent,
-    CreateComponent
+    CreateComponent,
+    EditComponent
   ],
   providers: [
     UsersService

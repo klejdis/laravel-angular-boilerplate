@@ -51,6 +51,7 @@ import {
 
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { RolesComponent } from './views/roles/roles.component';
+import { RouterLinkRendererComponent } from './shared/aggrid/router-link-renderer/router-link-renderer.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -66,7 +67,8 @@ const APP_CONTAINERS = [
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
-    RolesComponent
+    RolesComponent,
+    RouterLinkRendererComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +100,7 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     CardModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([RouterLinkRendererComponent]),
     NgSelectModule,
     ToastrModule.forRoot()
   ],
