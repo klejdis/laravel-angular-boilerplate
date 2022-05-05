@@ -6,7 +6,6 @@ import {cilPlus, cilPencil} from '@coreui/icons';
 import {HttpClient} from "@angular/common/http";
 import { Observable } from 'rxjs';
 import {UsersService} from "../users.service";
-
 //ag grid
 import {
   CheckboxSelectionCallbackParams,
@@ -26,7 +25,8 @@ import {
   IRouterLinkRendererComponentOptions,
   RouterLinkRendererComponent
 } from "../../../shared/aggrid/router-link-renderer/router-link-renderer.component";
-
+import {DynamicComponentRendererComponent} from "../../../shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-component-renderer.component";
+import {ActionLinkComponent} from "../../../shared/aggrid/action-link/action-link.component";
 
 @Injectable()
 @Component({
@@ -69,6 +69,16 @@ export class UsersComponent implements OnInit {
           }
         }
       },
+      },
+    { headerName: 'Actions Dynamic', field: '',
+      cellRenderer: DynamicComponentRendererComponent,
+        cellRendererParams: {
+          dynamicComponentConfig: (param: any):any => {
+              return {
+                component: ActionLinkComponent
+              }
+          }
+        },
       },
   ];
 

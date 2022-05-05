@@ -52,6 +52,9 @@ import {
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
 import { RolesComponent } from './views/roles/roles.component';
 import { RouterLinkRendererComponent } from './shared/aggrid/router-link-renderer/router-link-renderer.component';
+import { DynamicComponentRendererComponent } from './shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-component-renderer.component';
+import { ActionLinkComponent } from './shared/aggrid/action-link/action-link.component';
+import {DynamicCmpHostDirective} from "./shared/aggrid/dynamic-component/dynamic-cmp-host/dynamic-cmp-host.directive";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -68,7 +71,10 @@ const APP_CONTAINERS = [
     AppComponent,
     ...APP_CONTAINERS,
     RolesComponent,
-    RouterLinkRendererComponent
+    RouterLinkRendererComponent,
+    DynamicComponentRendererComponent,
+    ActionLinkComponent,
+    DynamicCmpHostDirective
   ],
   imports: [
     BrowserModule,
@@ -101,7 +107,10 @@ const APP_CONTAINERS = [
     BadgeModule,
     ListGroupModule,
     CardModule,
-    AgGridModule.withComponents([RouterLinkRendererComponent]),
+    AgGridModule.withComponents([
+      RouterLinkRendererComponent,
+      DynamicComponentRendererComponent
+    ]),
     NgSelectModule,
     ToastrModule.forRoot()
   ],
