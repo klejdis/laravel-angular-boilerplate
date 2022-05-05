@@ -45,20 +45,27 @@ export class UsersComponent implements OnInit {
     { field: 'last_name',headerName: 'Last Name' },
     { field: 'email', headerName: 'Email'},
     { field: 'created_at', headerName: 'Created At'},
-    {headerName: 'Actions', field: '',
+    { headerName: 'Actions', field: '',
       cellRenderer: RouterLinkRendererComponent,
       cellRendererParams: {
-        routerLinkRendererComponentOptions: (param: any): IRouterLinkRendererComponentOptions => {
+        routerLinkRendererComponentOptions: (param: any): Array<IRouterLinkRendererComponentOptions> => {
           if (param.data) {
-            return {
-              routerLinkParams: ['/users', param.data.id, 'edit'],
-              linkDescription: '',
-              icon:'cilPlus',
-            };
+            return [
+              {
+                routerLinkParams: ['/users', param.data.id, 'edit'],
+                icon: 'cilPencil',
+              },
+              {
+                routerLinkParams: ['/users', param.data.id, 'edit'],
+                icon: 'cilTrash',
+              }
+            ];
           } else {
-            return {
-              textOnly: '-'
-            };
+            return [
+              {
+                textOnly: '-',
+              }
+            ];
           }
         }
       },

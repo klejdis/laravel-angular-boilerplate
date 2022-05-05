@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
+import {IconSetService} from "@coreui/icons-angular";
+import {cilPencil, cilTrash} from "@coreui/icons";
 
 export interface IRouterLinkRendererComponentOptions {
   routerLinkParams?: any[];
@@ -11,23 +13,40 @@ export interface IRouterLinkRendererComponentOptions {
 
 @Component({
   template: `
-        <a *ngIf="params.textOnly == null; else textOnlyBlock"
-           [routerLink]="params.routerLinkParams"
-           [target]="params.target ? params.target : '_self'"
-        >
-            {{ params.linkDescription }}
-        </a>
+        <span *ngFor="let param of params">
 
-        <ng-template #textOnlyBlock>
+          <a *ngIf="param.textOnly == null; else textOnlyBlock"
+             [routerLink]="param.routerLinkParams"
+             [target]="param.target ? param.target : '_self'"
+             class="router-link-renderer"
+          >
 
-          <svg cIcon [name]="params.icon"  title=""></svg>
+            <svg cIcon *ngIf="param.icon" [name]="param.icon"></svg>
 
-          {{ params.textOnly }}
-        </ng-template>
-    `
+            <ng-template [ngIf]="param.linkDescription">
+              {{ param.linkDescription }}
+            </ng-template>
+
+          </a>
+
+          <ng-template #textOnlyBlock>
+            {{ param.textOnly }}
+          </ng-template>
+
+        </span>
+
+
+    `,
+  providers: [IconSetService],
 })
 export class RouterLinkRendererComponent implements ICellRendererAngularComp {
-  params: IRouterLinkRendererComponentOptions;
+
+  constructor(public iconSet: IconSetService) {
+    // iconSet singleton
+    iconSet.icons = { cilPencil , cilTrash};
+  }
+
+  params: Array<IRouterLinkRendererComponentOptions>;
 
   agInit(params: any): void {
     this.params = params.routerLinkRendererComponentOptions(params);

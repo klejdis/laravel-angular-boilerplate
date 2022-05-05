@@ -49,7 +49,7 @@ import {
   UtilitiesModule,
 } from '@coreui/angular';
 
-import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
 import { RolesComponent } from './views/roles/roles.component';
 import { RouterLinkRendererComponent } from './shared/aggrid/router-link-renderer/router-link-renderer.component';
 
@@ -85,6 +85,7 @@ const APP_CONTAINERS = [
     HeaderModule,
     SidebarModule,
     IconModule,
+    IconSetModule.forRoot(),
     PerfectScrollbarModule,
     NavModule,
     ButtonModule,
