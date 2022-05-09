@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import { Injectable} from "@angular/core";
 import { DomSanitizer } from '@angular/platform-browser';
 import { IconSetService } from '@coreui/icons-angular';
@@ -27,6 +27,8 @@ import {
 } from "../../../shared/aggrid/router-link-renderer/router-link-renderer.component";
 import {DynamicComponentRendererComponent} from "../../../shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-component-renderer.component";
 import {ActionLinkComponent} from "../../../shared/aggrid/action-link/action-link.component";
+import {DynamicCmpConfig} from "../../../shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-cmp-config";
+import {NotificationService} from "../../../services/toastr/notification.service";
 
 @Injectable()
 @Component({
@@ -45,37 +47,38 @@ export class UsersComponent implements OnInit {
     { field: 'last_name',headerName: 'Last Name' },
     { field: 'email', headerName: 'Email'},
     { field: 'created_at', headerName: 'Created At'},
-    { headerName: 'Actions', field: '',
-      cellRenderer: RouterLinkRendererComponent,
-      cellRendererParams: {
-        routerLinkRendererComponentOptions: (param: any): Array<IRouterLinkRendererComponentOptions> => {
-          if (param.data) {
-            return [
-              {
-                routerLinkParams: ['/users', param.data.id, 'edit'],
-                icon: 'cilPencil',
-              },
-              {
-                routerLinkParams: ['/users', param.data.id, 'edit'],
-                icon: 'cilTrash',
-              }
-            ];
-          } else {
-            return [
-              {
-                textOnly: '-',
-              }
-            ];
-          }
-        }
-      },
-      },
-    { headerName: 'Actions Dynamic', field: '',
+    {
+      headerName: 'Actions',
+      field: '',
       cellRenderer: DynamicComponentRendererComponent,
-        cellRendererParams: {
-          dynamicComponentConfig: (param: any):any => {
+      cellRendererParams: {
+          dynamicComponentConfig: (param: any): DynamicCmpConfig => {
               return {
-                component: ActionLinkComponent
+                components: [
+                  {
+                    component: ActionLinkComponent,
+                    data: {
+                      data:  param.data,
+                      routerLink: ['/users', param.data?.id, 'edit'],
+                      icon: 'cilPencil',
+                    }
+                  },
+                  {
+                    component: ActionLinkComponent,
+                    data: {
+                      data:  param.data,
+                      icon: 'cilTrash',
+                      confirm: true,
+                      listeners:{
+                        handleClick: (component: DynamicComponentRendererComponent) => {
+                          component.clickEvent.subscribe( (event: any) => {
+                              this.deleteUser(event);
+                          });
+                        }
+                      }
+                    }
+                  }
+                ],
               }
           }
         },
@@ -105,6 +108,7 @@ export class UsersComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private userService: UsersService,
     public iconSet: IconSetService,
+    private toastr: NotificationService
   ) {
     iconSet.icons = { cilPlus };
   }
@@ -113,22 +117,43 @@ export class UsersComponent implements OnInit {
   }
 
   onGridReady(params: GridReadyEvent) {
+    this.loadGridData(params);
+  }
 
+  loadGridData(params: GridReadyEvent){
     this.gridApi = params.api;
 
     const datasource = {
-        // called by the grid when more rows are required
-        getRows: (params: IGetRowsParams) => {
-          // get data for request from server
-          this.userService.getUsers(this.gridApi.paginationGetCurrentPage() + 1)
-            .subscribe((data:any) => {
-              params.successCallback( data.data, data.meta.total );
-            });
-        }
+      // called by the grid when more rows are required
+      getRows: (params: IGetRowsParams) => {
+        // get data for request from server
+        this.userService.getUsers(this.gridApi.paginationGetCurrentPage() + 1)
+          .subscribe((data:any) => {
+            params.successCallback( data.data, data.meta.total );
+          });
+      }
 
     }
 
     params.api!.setDatasource(datasource);
+  }
+
+  deleteUser(data: any){
+
+    this.userService.deleteUser(data.data.id)
+      .subscribe({
+      next: (data: any) => {
+        if (!data.errors){
+          this.gridApi.refreshInfiniteCache();
+
+          this.toastr.showSuccess('User Deleted','');
+        }
+      },
+      error: (data:any) => {
+        this.toastr.showError(data?.error.message,'');
+      }
+    });
+
   }
 
 }

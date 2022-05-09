@@ -17,4 +17,8 @@ export class UsersService{
   storeUser(user: any): Observable<any> | void | null{
     return this.http.post(environment.url.base_url+'/api/users/store',user);
   }
+
+  deleteUser(id: number){
+    return this.http.delete(environment.url.base_url+'/api/users/'+id+'/destroy');
+  }
 }

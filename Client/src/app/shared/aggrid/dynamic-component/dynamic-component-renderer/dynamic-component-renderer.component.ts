@@ -1,41 +1,55 @@
 import {
   AfterContentInit,
   Component,
-  ComponentFactoryResolver,
-  OnInit,
+  ComponentFactoryResolver, ComponentRef, EventEmitter,
+  OnInit, Output,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
 import {ICellRendererAngularComp} from "ag-grid-angular";
 import {DynamicCmpHostDirective} from "../dynamic-cmp-host/dynamic-cmp-host.directive";
-
-export interface DynamicCmpConfig{
-  component: any
-}
+import {DynamicCmpConfig} from "./dynamic-cmp-config";
 
 @Component({
   selector: 'app-dynamic-component-renderer',
-  // templateUrl: './dynamic-component-renderer.component.html',
   styleUrls: ['./dynamic-component-renderer.component.scss'],
   template: `
     <ng-template appDynamicCmpHost>
     </ng-template>
   `
 })
-export class DynamicComponentRendererComponent implements OnInit,ICellRendererAngularComp {
+export class DynamicComponentRendererComponent implements OnInit,ICellRendererAngularComp, AfterContentInit {
 
   @ViewChild(DynamicCmpHostDirective, {static: true}) cmpHost!: DynamicCmpHostDirective;
 
-  params: any;
+  @Output()
+  public clickEvent:EventEmitter<string> = new EventEmitter();
 
-  constructor(
-  ) {
+  params: DynamicCmpConfig;
+
+  constructor() {}
+
+  ngOnInit() {
 
   }
 
-  ngOnInit() {
+  ngAfterContentInit() {
     this.cmpHost.viewContainerRef.clear();
-    this.cmpHost.viewContainerRef.createComponent(this.params.component)
+
+    for (let component of this.params.components){
+
+      const cmpRef: ComponentRef<any> = this.cmpHost.viewContainerRef.createComponent(component.component);
+      cmpRef.instance.data = component.data;
+
+      if (component?.data?.listeners?.handleClick){
+
+        cmpRef.instance.clicked.subscribe( (event: any) => {
+          this.clickEvent.emit(event);
+        });
+
+        component.data.listeners.handleClick(this);
+      }
+    }
   }
 
   agInit(params: any): void {
@@ -43,7 +57,7 @@ export class DynamicComponentRendererComponent implements OnInit,ICellRendererAn
   }
 
   refresh(params: any): boolean {
-    return true;
+    return false;
   }
 
 

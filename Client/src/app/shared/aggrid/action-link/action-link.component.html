@@ -1,1 +1,15 @@
-<a href="">link</a>
+<a
+   [routerLink]="(data.confirm == null) ? data.routerLink : null"
+   [target]="data.target ? data.target : '_self'"
+   class="router-link-renderer"
+   (click)="handleClick($event)"
+>
+
+  <svg cIcon *ngIf="data.icon" [name]="data.icon"></svg>
+
+  <ng-template [ngIf]="data.linkDescription">
+    {{ data.linkDescription }}
+  </ng-template>
+
+</a>
+
