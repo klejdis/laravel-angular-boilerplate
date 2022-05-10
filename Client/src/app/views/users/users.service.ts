@@ -10,12 +10,21 @@ export class UsersService{
   constructor(private http: HttpClient) {
   }
 
+  getUser(id: number){
+    return this.http.get(environment.url.base_url+'/api/users/'+id+'/show');
+  }
+
   getUsers(page: number){
     return this.http.get(environment.url.base_url+'/api/users?page=' + page);
   }
 
   storeUser(user: any): Observable<any> | void | null{
     return this.http.post(environment.url.base_url+'/api/users/store',user);
+  }
+
+  updateUser(id: number, user: any): Observable<any> | void | null{
+    console.log(user);
+    return this.http.patch(environment.url.base_url+'/api/users/'+id+'/update',user);
   }
 
   deleteUser(id: number){

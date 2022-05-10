@@ -51,7 +51,6 @@ import {
 
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
 import { RolesComponent } from './views/roles/roles.component';
-import { RouterLinkRendererComponent } from './shared/aggrid/router-link-renderer/router-link-renderer.component';
 import { DynamicComponentRendererComponent } from './shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-component-renderer.component';
 import { ActionLinkComponent } from './shared/aggrid/action-link/action-link.component';
 import {DynamicCmpHostDirective} from "./shared/aggrid/dynamic-component/dynamic-cmp-host/dynamic-cmp-host.directive";
@@ -71,7 +70,6 @@ const APP_CONTAINERS = [
     AppComponent,
     ...APP_CONTAINERS,
     RolesComponent,
-    RouterLinkRendererComponent,
     DynamicComponentRendererComponent,
     ActionLinkComponent,
     DynamicCmpHostDirective
@@ -108,7 +106,6 @@ const APP_CONTAINERS = [
     ListGroupModule,
     CardModule,
     AgGridModule.withComponents([
-      RouterLinkRendererComponent,
       DynamicComponentRendererComponent
     ]),
     NgSelectModule,

@@ -1,1 +1,94 @@
-<p>edit works!</p>
+<c-card class="mb-4">
+  <c-card-header ngPreserveWhitespaces>
+    <strong> Edit User </strong>
+  </c-card-header>
+
+  <c-card-body>
+    <form
+      class="row g-3 validate-when-touched show-only-errors"
+      novalidate
+      (ngSubmit)="onSubmit()"
+      [formGroup]="form"
+    >
+
+      <c-row class="g-3">
+
+        <c-col [xs]="6">
+          <label cLabel >First Name</label>
+
+          <input aria-label="First name"
+                 cFormControl
+                 placeholder="First name"
+                 name="first_name"
+                 type="text"
+                 formControlName="first_name"
+          />
+        </c-col>
+
+        <c-col [xs]="6">
+          <label cLabel >Last Name</label>
+
+          <input aria-label="Last name"
+                 cFormControl
+                 placeholder="Last name"
+                 formControlName="last_name"
+          />
+        </c-col>
+
+        <c-col [xs]="6">
+          <label cLabel >Email</label>
+          <input aria-label="Email" cFormControl placeholder="Email"
+                 formControlName="email"
+          />
+        </c-col>
+
+        <c-col [xs]="6">
+          <label cLabel >Activate</label>
+
+          <div cFormControl>
+            <c-form-check [switch]="true">
+              <input cFormCheckInput type="checkbox" formControlName="is_activated"  [checked]="true" />
+              <label cFormCheckLabel> if checked user will be able to login</label>
+            </c-form-check>
+          </div>
+
+        </c-col>
+
+        <c-col [xs]="6">
+          <label cLabel>Password</label>
+
+          <input cFormControl type="password" placeholder="Password"
+                 formControlName="password"
+          >
+          <small>leave it blank if do not want to change it </small>
+        </c-col>
+
+        <c-col [xs]="6">
+          <label cLabel>Password Confirmation</label>
+          <input cFormControl type="password"
+                 formControlName="password_confirmation"
+                 placeholder="Password Confirmation" >
+        </c-col>
+
+        <c-col [xs]="6">
+          <label cLabel>Roles</label>
+          <ng-select [items]="roles"
+                     bindLabel="name"
+                     bindValue="id"
+                     formControlName="roles"
+                     [multiple]="true"
+                     appendTo="body"
+          >
+          </ng-select>
+        </c-col>
+
+
+
+
+        <c-col [xs]="12" class="d-flex justify-content-end">
+          <button cButton type="submit" [disabled]="!form.valid">Submit</button>
+        </c-col>
+      </c-row>
+    </form>
+  </c-card-body>
+</c-card>

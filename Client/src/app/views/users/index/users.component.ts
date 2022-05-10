@@ -21,10 +21,6 @@ import {
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import {GridApi} from "ag-grid-community/dist/lib/gridApi";
-import {
-  IRouterLinkRendererComponentOptions,
-  RouterLinkRendererComponent
-} from "../../../shared/aggrid/router-link-renderer/router-link-renderer.component";
 import {DynamicComponentRendererComponent} from "../../../shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-component-renderer.component";
 import {ActionLinkComponent} from "../../../shared/aggrid/action-link/action-link.component";
 import {DynamicCmpConfig} from "../../../shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-cmp-config";
@@ -139,19 +135,18 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(data: any){
-
     this.userService.deleteUser(data.data.id)
       .subscribe({
-      next: (data: any) => {
-        if (!data.errors){
-          this.gridApi.refreshInfiniteCache();
+        next: (data: any) => {
+          if (!data.errors){
+            this.gridApi.refreshInfiniteCache();
 
-          this.toastr.showSuccess('User Deleted','');
+            this.toastr.showSuccess('User Deleted','');
+          }
+        },
+        error: (data:any) => {
+          this.toastr.showError(data?.error.message,'');
         }
-      },
-      error: (data:any) => {
-        this.toastr.showError(data?.error.message,'');
-      }
     });
 
   }

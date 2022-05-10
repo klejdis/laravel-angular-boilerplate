@@ -52,8 +52,6 @@ export class CreateComponent implements OnInit {
     this.usersService.storeUser( this.createUserForm?.value )
       .subscribe({
         next: (data: any) => {
-          console.log(data.errors);
-          console.log(data.errors == false);
 
           if (data.errors == false){
             this.toastr.showSuccess(data.message, '');
@@ -63,7 +61,6 @@ export class CreateComponent implements OnInit {
           }
         },
         error: (data: any) => {
-          console.log(data);
           this.toastr.showError(data?.error.message, '');
 
         }
