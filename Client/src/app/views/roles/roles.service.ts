@@ -16,4 +16,24 @@ export class RolesService{
     return this.http.get(environment.url.base_url+'/api/roles');
   }
 
+  getRoles(page: number){
+    return this.http.get(environment.url.base_url+'/api/roles/paginated?page='+page);
+  }
+
+  getRole(id: number){
+    return this.http.get(environment.url.base_url+'/api/roles/'+id+'/show');
+  }
+
+  store(data: any): Observable<any> | void | null{
+    return this.http.post(environment.url.base_url+'/api/roles/store',data);
+  }
+
+  update(id: number, data: any): Observable<any> | void | null{
+    return this.http.patch(environment.url.base_url+'/api/roles/'+id+'/update',data);
+  }
+
+  delete(id: number){
+    return this.http.delete(environment.url.base_url+'/api/roles/'+id+'/destroy');
+  }
+
 }

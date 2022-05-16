@@ -5,6 +5,11 @@ import { FormsModule as FM } from '@angular/forms';
 import { AgGridModule} from "ag-grid-angular";
 import { NgSelectModule} from "@ng-select/ng-select";
 
+import { IndexComponent } from './index/index.component';
+import {RolesRoutingModule} from "./roles-routing.module";
+import {RolesService} from "./roles.service";
+
+
 // CoreUI Modules
 import {
   AccordionModule,
@@ -35,20 +40,18 @@ import { IconModule } from '@coreui/icons-angular';
 
 // utils
 import { DocsComponentsModule } from '@docs-components/docs-components.module';
+import { CreateEditComponent } from './create-edit/create-edit.component';
 
-// views
-import {UsersComponent} from "./index/users.component";
-
-// Components Routing
-import { UsersRoutingModule } from './users-routing.module';
-import {UsersService} from "./users.service";
-import { CreateComponent } from './create/create.component';
-import { EditComponent } from './edit/edit.component';
 
 @NgModule({
+  declarations: [
+    IndexComponent,
+    CreateEditComponent,
+  ],
   imports: [
     CommonModule,
-    UsersRoutingModule,
+    RolesRoutingModule,
+    CommonModule,
     AccordionModule,
     BadgeModule,
     BreadcrumbModule,
@@ -79,13 +82,8 @@ import { EditComponent } from './edit/edit.component';
     FM,
     NgSelectModule
   ],
-  declarations: [
-    UsersComponent,
-    CreateComponent,
-    EditComponent
-  ],
   providers: [
-    UsersService
+    RolesService
   ]
 })
-export class UsersModule {}
+export class RolesModule { }

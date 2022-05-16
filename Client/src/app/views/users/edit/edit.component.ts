@@ -67,7 +67,7 @@ export class EditComponent implements OnInit {
 
   onSubmit(){
 
-      // @ts-ignore
+    // @ts-ignore
     this.usersService.updateUser(
         this.id,
         this.form?.value

@@ -1,0 +1,45 @@
+<c-card class="mb-4">
+  <c-card-header ngPreserveWhitespaces>
+    <strong> {{ (id != null) ? 'Edit' : 'Create' }} Role </strong>
+  </c-card-header>
+
+  <c-card-body>
+    <form
+      class="row g-3 validate-when-touched show-only-errors"
+      novalidate
+      (ngSubmit)="onSubmit()"
+      [formGroup]="form"
+    >
+
+      <c-row class="g-3">
+
+        <c-col [xs]="6">
+          <label cLabel >Name</label>
+
+          <input aria-label=" name"
+                 cFormControl
+                 placeholder=" name"
+                 name="name"
+                 type="text"
+                 formControlName="name"
+          />
+        </c-col>
+
+        <c-col [xs]="6">
+          <label cLabel >Slug</label>
+
+          <input aria-label="Slug"
+                 cFormControl
+                 placeholder="Slug"
+                 formControlName="slug"
+          />
+        </c-col>
+
+
+        <c-col [xs]="12" class="d-flex justify-content-end">
+          <button cButton type="submit" [disabled]="!form.valid">Submit</button>
+        </c-col>
+      </c-row>
+    </form>
+  </c-card-body>
+</c-card>

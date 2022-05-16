@@ -1,9 +1,8 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Injectable} from "@angular/core";
 import { DomSanitizer } from '@angular/platform-browser';
 import { IconSetService } from '@coreui/icons-angular';
 import {cilPlus, cilPencil} from '@coreui/icons';
-import {UsersService} from "../users.service";
 //ag grid
 import {
   CheckboxSelectionCallbackParams,
@@ -22,61 +21,60 @@ import {GridApi} from "ag-grid-community/dist/lib/gridApi";
 import {DynamicComponentRendererComponent} from "../../../shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-component-renderer.component";
 import {ActionLinkComponent} from "../../../shared/aggrid/action-link/action-link.component";
 import {DynamicCmpConfig} from "../../../shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-cmp-config";
+
 import {NotificationService} from "../../../services/toastr/notification.service";
+import {RolesService} from "../roles.service";
 
 @Injectable()
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
+  selector: 'app-index',
+  templateUrl: './index.component.html',
+  styleUrls: ['./index.component.scss'],
   providers: [IconSetService],
 })
-export class UsersComponent implements OnInit {
-
+export class IndexComponent implements OnInit {
   public icons!: [string, string[]][];
-
   public columnDefs: ColDef[] = [
     { field: 'id', headerName: 'Id' },
-    { field: 'first_name', headerName: 'First Name' },
-    { field: 'last_name',headerName: 'Last Name' },
-    { field: 'email', headerName: 'Email'},
+    { field: 'name', headerName: 'Name' },
+    { field: 'slug',headerName: 'Slug' },
     { field: 'created_at', headerName: 'Created At'},
     {
       headerName: 'Actions',
       field: '',
       cellRenderer: DynamicComponentRendererComponent,
       cellRendererParams: {
-          dynamicComponentConfig: (param: any): DynamicCmpConfig => {
-              return {
-                components: [
-                  {
-                    component: ActionLinkComponent,
-                    data: {
-                      data:  param.data,
-                      routerLink: ['/users', param.data?.id, 'edit'],
-                      icon: 'cilPencil',
-                    }
-                  },
-                  {
-                    component: ActionLinkComponent,
-                    data: {
-                      data:  param.data,
-                      icon: 'cilTrash',
-                      confirm: true,
-                      listeners:{
-                        handleClick: (component: DynamicComponentRendererComponent) => {
-                          component.clickEvent.subscribe( (event: any) => {
-                              this.deleteUser(event);
-                          });
-                        }
-                      }
+        dynamicComponentConfig: (param: any): DynamicCmpConfig => {
+          return {
+            components: [
+              {
+                component: ActionLinkComponent,
+                data: {
+                  data:  param.data,
+                  routerLink: ['/roles', param.data?.id, 'edit'],
+                  icon: 'cilPencil',
+                }
+              },
+              {
+                component: ActionLinkComponent,
+                data: {
+                  data:  param.data,
+                  icon: 'cilTrash',
+                  confirm: true,
+                  listeners:{
+                    handleClick: (component: DynamicComponentRendererComponent) => {
+                      component.clickEvent.subscribe( (event: any) => {
+                        this.deleteResource(event);
+                      });
                     }
                   }
-                ],
+                }
               }
+            ],
           }
-        },
+        }
       },
+    },
   ];
 
   public defaultColDef: ColDef = {
@@ -97,21 +95,20 @@ export class UsersComponent implements OnInit {
   private gridApi: GridApi;
 
   constructor(
-    private sanitizer: DomSanitizer,
-    private userService: UsersService,
+    private roleService: RolesService,
+    private toastr: NotificationService,
     public iconSet: IconSetService,
-    private toastr: NotificationService
+    private sanitizer: DomSanitizer,
   ) {
     iconSet.icons = { cilPlus };
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   onGridReady(params: GridReadyEvent) {
     this.loadGridData(params);
   }
-
   loadGridData(params: GridReadyEvent){
     this.gridApi = params.api;
 
@@ -119,7 +116,7 @@ export class UsersComponent implements OnInit {
       // called by the grid when more rows are required
       getRows: (params: IGetRowsParams) => {
         // get data for request from server
-        this.userService.getUsers(this.gridApi.paginationGetCurrentPage() + 1)
+        this.roleService.getRoles(this.gridApi.paginationGetCurrentPage() + 1)
           .subscribe((data:any) => {
             params.successCallback( data.data, data.meta.total );
           });
@@ -130,8 +127,8 @@ export class UsersComponent implements OnInit {
     params.api!.setDatasource(datasource);
   }
 
-  deleteUser(data: any){
-    this.userService.deleteUser(data.data.id)
+  deleteResource(data: any){
+    this.roleService.delete(data.data.id)
       .subscribe({
         next: (data: any) => {
           if (!data.errors){
@@ -143,9 +140,9 @@ export class UsersComponent implements OnInit {
         error: (data:any) => {
           this.toastr.showError(data?.error.message,'');
         }
-    });
+      });
 
   }
 
-}
 
+}

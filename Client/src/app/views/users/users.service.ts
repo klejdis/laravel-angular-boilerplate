@@ -23,7 +23,6 @@ export class UsersService{
   }
 
   updateUser(id: number, user: any): Observable<any> | void | null{
-    console.log(user);
     return this.http.patch(environment.url.base_url+'/api/users/'+id+'/update',user);
   }
 

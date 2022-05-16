@@ -50,7 +50,6 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
-import { RolesComponent } from './views/roles/roles.component';
 import { DynamicComponentRendererComponent } from './shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-component-renderer.component';
 import { ActionLinkComponent } from './shared/aggrid/action-link/action-link.component';
 import {DynamicCmpHostDirective} from "./shared/aggrid/dynamic-component/dynamic-cmp-host/dynamic-cmp-host.directive";
@@ -69,7 +68,6 @@ const APP_CONTAINERS = [
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
-    RolesComponent,
     DynamicComponentRendererComponent,
     ActionLinkComponent,
     DynamicCmpHostDirective
