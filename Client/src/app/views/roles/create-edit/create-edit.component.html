@@ -2,7 +2,7 @@
   <c-card-header ngPreserveWhitespaces>
     <strong> {{ (id != null) ? 'Edit' : 'Create' }} Role </strong>
   </c-card-header>
-
+{{ form.value | json}}
   <c-card-body>
     <form
       class="row g-3 validate-when-touched show-only-errors"
@@ -11,35 +11,77 @@
       [formGroup]="form"
     >
 
-      <c-row class="g-3">
+    <c-nav variant="tabs">
+      <c-nav-item>
+        <a [active]="true" [cTabContent]="roles_tab" routerLink="./" [tabPaneIdx]="0" cNavLink>
+          Role
+        </a>
+      </c-nav-item>
+      <c-nav-item>
+        <a [cTabContent]="roles_tab" routerLink="./" [tabPaneIdx]="1" cNavLink>
+          Permissions
+        </a>
+      </c-nav-item>
+    </c-nav>
 
-        <c-col [xs]="6">
-          <label cLabel >Name</label>
+    <c-tab-content #roles_tab="cTabContent" [activeTabPaneIdx]="1" cRounded="bottom">
+      <c-tab-pane class="p-3 preview" role="tabpanel">
+        <c-row class="g-3">
 
-          <input aria-label=" name"
-                 cFormControl
-                 placeholder=" name"
-                 name="name"
-                 type="text"
-                 formControlName="name"
-          />
-        </c-col>
+          <c-col [xs]="6">
+            <label cLabel >Name</label>
 
-        <c-col [xs]="6">
-          <label cLabel >Slug</label>
+            <input aria-label=" name"
+                   cFormControl
+                   placeholder=" name"
+                   type="text"
+                   formControlName="name"
+            />
+          </c-col>
 
-          <input aria-label="Slug"
-                 cFormControl
-                 placeholder="Slug"
-                 formControlName="slug"
-          />
-        </c-col>
+          <c-col [xs]="6">
+            <label cLabel >Slug</label>
+
+            <input aria-label="Slug"
+                   cFormControl
+                   placeholder="Slug"
+                   formControlName="slug"
+            />
+          </c-col>
 
 
-        <c-col [xs]="12" class="d-flex justify-content-end">
-          <button cButton type="submit" [disabled]="!form.valid">Submit</button>
-        </c-col>
-      </c-row>
+          <c-col [xs]="12" class="d-flex justify-content-end">
+            <button cButton type="submit" [disabled]="!form.valid">Submit</button>
+          </c-col>
+        </c-row>
+      </c-tab-pane>
+
+      <c-tab-pane class="p-3 preview" role="tabpanel">
+        <c-row class="g-3">
+
+          <c-col [xs]="6" *ngFor="let module of permissions">
+            <label cLabel > {{ module.module }}</label>
+
+            <ng-select [items]="module.permissions"
+                       [multiple]="true"
+                       (change)="onChange($event)"
+
+            >
+            </ng-select>
+          </c-col>
+
+
+          <c-col [xs]="12" class="d-flex justify-content-end">
+            <button cButton type="submit" [disabled]="!form.valid">Submit</button>
+          </c-col>
+        </c-row>
+      </c-tab-pane>
+    </c-tab-content>
+
+
+
+
+
     </form>
   </c-card-body>
 </c-card>
