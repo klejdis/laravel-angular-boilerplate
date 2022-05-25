@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MustMatch} from "../../../_helpers/must-match.validator";
 import {RolesService} from "../../roles/roles.service";
 import {NotificationService} from "../../../services/toastr/notification.service";
@@ -11,16 +11,19 @@ import {PermissionService} from "../../../services/permissions/permission.servic
   templateUrl: './create-edit.component.html',
   styleUrls: ['./create-edit.component.scss']
 })
-export class CreateEditComponent implements OnInit {
+export class CreateEditComponent implements OnInit{
 
   id: number;// this one if set we are on edit mode
+
   permissions:any
 
-  form = this.fb.group({
+  formConfig:any = {
     'name' : ['', Validators.required],
     'slug' : ['', Validators.required],
-    'permissions' : ['', Validators.required],
-  });
+    'permissions' : this.fb.array([]),
+  };
+
+  form: FormGroup = this.fb.group(this.formConfig);
 
 
   constructor(
@@ -30,41 +33,59 @@ export class CreateEditComponent implements OnInit {
     private route: Router,
     private toastr: NotificationService,
     private permissionService: PermissionService
-  ) { }
+  ) {
+    this.id = this.activatedRoute.snapshot.params['id'];
+  }
 
   ngOnInit(): void {
-
-    this.id = this.activatedRoute.snapshot.params['id'];
-
     //get permissions
     this.permissionService.get()
       .subscribe({
         next: (data: any) => {
           this.permissions = data.data;
+          this.addPermissionFormGroup();
         },
         error: (data: any) => {
-
         },
       });
 
-
+    //if in edit mode
     if (this.id){
       //get role
       this.roleService.getRole(this.id)
         .subscribe({
           next: (data: any) => {
-            this.form.patchValue(data?.data);
+            var res = data?.data;
+
+            this.form.patchValue({
+             'name': res.name,
+             'slug': res.slug,
+            });
+
+            this.permissionsArray.map((formControl:AbstractControl) => {
+              let found = res.permissions.filter((permission: { module: string; }) => {
+                return permission.module == formControl.value.module
+              });
+
+               if (found.length){
+                 formControl.patchValue({
+                   'permissions': found[0].permissions
+                 });
+               }
+            });
+
           },
           error: (data: any) => {
-
           },
         });
-
     }
   }
 
-  onSubmit(){
 
+  get permissionsArray(){
+    return (this.form.controls['permissions'] as FormArray).controls;
+  }
+  onSubmit(){
     if (!this.id){
       // @ts-ignore
       this.roleService.store(
@@ -109,25 +130,37 @@ export class CreateEditComponent implements OnInit {
 
   }
 
-  onChange($event: any) {
 
-    //filter the event for unique values
-    $event =  $event.filter( (permission:any) => {
-      if(this.form.controls['permissions'].value){
-        let found = this.form.controls['permissions'].value.find( (obj: any) =>{
-          return obj.value == permission.value;
-        });
-        return found == undefined;
-      }else{
-        return true
-      }
+
+  onRemove($event: any) {
+    console.log($event)
+  }
+
+  onSelectAll() {
+
+    this.form.controls['permissions'].patchValue(this.permissions);
+  }
+
+  onClearAll() {
+    this.permissionsArray.map((formControl:AbstractControl) => {
+      formControl.patchValue({
+        'permissions': []
+      });
     });
+  }
 
-    this.form.controls['permissions'].patchValue(
-       [
-         ...$event,
-         ...this.form.controls['permissions'].value
-       ]);
+  private addPermissionFormGroup() {
+    const permissions = this.form.get('permissions') as FormArray
 
+    this.permissions.map((module:any) => {
+      permissions.push(this.createPermisionFormGroup(module));
+    });
+  }
+
+  private createPermisionFormGroup(module:any): FormGroup {
+    return new FormGroup({
+      module : new FormControl(module.module),
+      permissions : new FormControl(''),
+    });
   }
 }

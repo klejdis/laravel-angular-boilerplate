@@ -10,5 +10,4 @@ export class PermissionService extends BaseClientService{
 
   override get_url:string = '/permissions';
 
-
 }

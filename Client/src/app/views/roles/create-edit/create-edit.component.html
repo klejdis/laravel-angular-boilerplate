@@ -2,7 +2,7 @@
   <c-card-header ngPreserveWhitespaces>
     <strong> {{ (id != null) ? 'Edit' : 'Create' }} Role </strong>
   </c-card-header>
-{{ form.value | json}}
+  
   <c-card-body>
     <form
       class="row g-3 validate-when-touched show-only-errors"
@@ -58,17 +58,30 @@
 
       <c-tab-pane class="p-3 preview" role="tabpanel">
         <c-row class="g-3">
+          <c-col>
+            <button class="m-1" (click)="onSelectAll()" cButton color="primary">Select All</button>
+            <button cButton  (click)="onClearAll()"  color="secondary">Clear All</button>
 
-          <c-col [xs]="6" *ngFor="let module of permissions">
-            <label cLabel > {{ module.module }}</label>
-
-            <ng-select [items]="module.permissions"
-                       [multiple]="true"
-                       (change)="onChange($event)"
-
-            >
-            </ng-select>
           </c-col>
+        </c-row>
+
+        <c-row class="g-3"  >
+          <ng-container formArrayName="permissions" *ngFor="let module of permissionsArray; let i = index">
+              <ng-container [formGroupName]="i">
+                <c-col [xs]="6">
+                  <label cLabel > {{ permissions[i]?.module}}</label>
+
+                  <ng-select
+                    [items]="permissions[i].permissions"
+                    [multiple]="true"
+                    formControlName="permissions"
+                  >
+                  </ng-select>
+                </c-col>
+              </ng-container>
+
+          </ng-container >
+
 
 
           <c-col [xs]="12" class="d-flex justify-content-end">
