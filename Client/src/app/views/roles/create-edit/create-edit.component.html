@@ -2,7 +2,7 @@
   <c-card-header ngPreserveWhitespaces>
     <strong> {{ (id != null) ? 'Edit' : 'Create' }} Role </strong>
   </c-card-header>
-  
+
   <c-card-body>
     <form
       class="row g-3 validate-when-touched show-only-errors"
@@ -59,7 +59,7 @@
       <c-tab-pane class="p-3 preview" role="tabpanel">
         <c-row class="g-3">
           <c-col>
-            <button class="m-1" (click)="onSelectAll()" cButton color="primary">Select All</button>
+            <button class="m-1"  (click)="onSelectAllPermissions($event)" cButton color="primary">Select All</button>
             <button cButton  (click)="onClearAll()"  color="secondary">Clear All</button>
 
           </c-col>
@@ -71,12 +71,23 @@
                 <c-col [xs]="6">
                   <label cLabel > {{ permissions[i]?.module}}</label>
 
-                  <ng-select
-                    [items]="permissions[i].permissions"
-                    [multiple]="true"
-                    formControlName="permissions"
-                  >
-                  </ng-select>
+                 <c-row>
+                   <c-col [xs]="9">
+                     <ng-select
+                       #pselect
+                       [items]="permissions[i].permissions"
+                       [multiple]="true"
+                       formControlName="permissions"
+                     >
+                     </ng-select>
+                   </c-col>
+
+                   <c-col [xs]="3">
+                     <button class="btn btn-primary" (click)="onSelectAll($event,i,permissions[i].permissions)"> select all</button>
+
+                   </c-col>
+                 </c-row>
+
                 </c-col>
               </ng-container>
 

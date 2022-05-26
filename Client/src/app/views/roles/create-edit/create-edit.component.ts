@@ -39,15 +39,7 @@ export class CreateEditComponent implements OnInit{
 
   ngOnInit(): void {
     //get permissions
-    this.permissionService.get()
-      .subscribe({
-        next: (data: any) => {
-          this.permissions = data.data;
-          this.addPermissionFormGroup();
-        },
-        error: (data: any) => {
-        },
-      });
+    this.getPermissions();
 
     //if in edit mode
     if (this.id){
@@ -81,6 +73,17 @@ export class CreateEditComponent implements OnInit{
     }
   }
 
+  async getPermissions(){
+    await this.permissionService.get()
+      .subscribe({
+        next: (data: any) => {
+          this.permissions = data.data;
+          this.addPermissionFormGroup();
+        },
+        error: (data: any) => {
+        },
+      });
+  }
 
   get permissionsArray(){
     return (this.form.controls['permissions'] as FormArray).controls;
@@ -127,18 +130,25 @@ export class CreateEditComponent implements OnInit{
         });
     }
 
-
   }
-
 
 
   onRemove($event: any) {
     console.log($event)
   }
 
-  onSelectAll() {
+  onSelectAll($event: any, index: number, permissions: []) {
+    $event.preventDefault();
 
-    this.form.controls['permissions'].patchValue(this.permissions);
+    (this.form.controls['permissions'] as FormArray).controls[index].patchValue({
+      'permissions': permissions
+    });
+  }
+
+  onSelectAllPermissions($event: any) {
+    $event.preventDefault();
+
+    (this.form.controls['permissions'] as FormArray).patchValue(this.permissions);
   }
 
   onClearAll() {
