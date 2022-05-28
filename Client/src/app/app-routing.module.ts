@@ -6,6 +6,7 @@ import { Page404Component } from './views/pages/page404/page404.component';
 import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
 const routes: Routes = [
   {
@@ -118,11 +119,11 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'top',
       anchorScrolling: 'enabled',
-      initialNavigation: 'enabledBlocking'
-      // relativeLinkResolution: 'legacy'
+      initialNavigation: 'enabledBlocking',
+        // relativeLinkResolution: 'legacy'
     })
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {
 }

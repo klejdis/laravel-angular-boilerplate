@@ -39,6 +39,13 @@ export class UsersComponent implements OnInit {
     { field: 'id', headerName: 'Id' },
     { field: 'first_name', headerName: 'First Name' },
     { field: 'last_name',headerName: 'Last Name' },
+    { field: 'roles',headerName: 'Roles',
+      cellRenderer: (params:any) => {
+        return params.data?.rolesDetailed.map( (role:any) => {
+          return role.name;
+        })?.join(', ');
+      }
+    },
     { field: 'email', headerName: 'Email'},
     { field: 'created_at', headerName: 'Created At'},
     {
