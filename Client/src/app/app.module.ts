@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
-import { HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -51,6 +51,7 @@ import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular
 import { DynamicComponentRendererComponent } from './shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-component-renderer.component';
 import { ActionLinkComponent } from './shared/aggrid/action-link/action-link.component';
 import {DynamicCmpHostDirective} from "./shared/aggrid/dynamic-component/dynamic-cmp-host/dynamic-cmp-host.directive";
+import {JwtInterceptorService} from "./services/jwt-intereptor/jwt-interceptor.service";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -117,7 +118,12 @@ const APP_CONTAINERS = [
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
     },
     IconSetService,
-    Title
+    Title,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
