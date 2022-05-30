@@ -7,6 +7,8 @@ import { Page500Component } from './views/pages/page500/page500.component';
 import { LoginComponent } from './views/pages/login/login.component';
 import { RegisterComponent } from './views/pages/register/register.component';
 import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import {GuestGuardService} from "./services/guest-guard/guest-guard.service";
+import {AuthGuardService} from "./services/auth-guard/auth-guard.service";
 
 const routes: Routes = [
   {
@@ -17,6 +19,7 @@ const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate: [AuthGuardService],
     data: {
       title: 'Home'
     },
@@ -99,6 +102,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [GuestGuardService],
     component: LoginComponent,
     data: {
       title: 'Login Page'
@@ -106,12 +110,15 @@ const routes: Routes = [
   },
   {
     path: 'register',
+    canActivate: [GuestGuardService],
     component: RegisterComponent,
     data: {
       title: 'Register Page'
     }
   },
-  {path: '**', redirectTo: 'dashboard'}
+  {
+    path: '**', redirectTo: '404'
+  }
 ];
 
 @NgModule({

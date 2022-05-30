@@ -19,7 +19,7 @@ export const navItems: INavData[] = [
   {
     name: 'Roles',
     url: '/roles',
-    iconComponent: { name: '' },
+    iconComponent: { name: 'cil-cursor' },
   },
   {
     title: true,

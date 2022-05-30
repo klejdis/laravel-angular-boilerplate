@@ -6,15 +6,10 @@ import {cilPlus, cilPencil} from '@coreui/icons';
 import {UsersService} from "../users.service";
 //ag grid
 import {
-  CheckboxSelectionCallbackParams,
   ColDef,
-  Grid,
-  GridOptions,
   GridReadyEvent,
-  IServerSideDatasource,
   ServerSideStoreType,
   IGetRowsParams,
-  IServerSideGetRowsParams
 } from 'ag-grid-community';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -36,10 +31,18 @@ export class UsersComponent implements OnInit {
   public icons!: [string, string[]][];
 
   public columnDefs: ColDef[] = [
-    { field: 'id', headerName: 'Id' },
+    { field: 'id',
+      headerName: 'Id',
+      filter: 'agNumberColumnFilter',
+      filterParams: {
+        filterOptions: ['equals', 'lessThan', 'greaterThan'],
+        buttons: ['reset', 'apply'],
+      }
+    },
     { field: 'first_name', headerName: 'First Name' },
     { field: 'last_name',headerName: 'Last Name' },
     { field: 'roles',headerName: 'Roles',
+      sortable: false,
       cellRenderer: (params:any) => {
         return params.data?.rolesDetailed.map( (role:any) => {
           return role.name;
@@ -47,7 +50,7 @@ export class UsersComponent implements OnInit {
       }
     },
     { field: 'email', headerName: 'Email'},
-    { field: 'created_at', headerName: 'Created At'},
+    { field: 'created_at', headerName: 'Created At',filter: 'agDateColumnFilter',},
     {
       headerName: 'Actions',
       field: '',
@@ -125,8 +128,11 @@ export class UsersComponent implements OnInit {
     const datasource = {
       // called by the grid when more rows are required
       getRows: (params: IGetRowsParams) => {
+        console.log(params)
         // get data for request from server
-        this.userService.getUsers(this.gridApi.paginationGetCurrentPage() + 1)
+        this.userService.getUsers(this.gridApi.paginationGetCurrentPage() + 1,{
+          params: params
+        })
           .subscribe((data:any) => {
             params.successCallback( data.data, data.meta.total );
           });

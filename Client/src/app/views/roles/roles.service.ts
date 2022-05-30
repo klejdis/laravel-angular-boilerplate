@@ -16,8 +16,8 @@ export class RolesService{
     return this.http.get(environment.url.base_url+'/api/roles');
   }
 
-  getRoles(page: number){
-    return this.http.get(environment.url.base_url+'/api/roles/paginated?page='+page);
+  getRoles(page: number, options: any = null){
+    return this.http.post(environment.url.base_url+'/api/roles/paginated?page='+page, options);
   }
 
   getRole(id: number){

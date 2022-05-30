@@ -14,8 +14,8 @@ export class UsersService{
     return this.http.get(environment.url.base_url+'/api/users/'+id+'/show');
   }
 
-  getUsers(page: number){
-    return this.http.get(environment.url.base_url+'/api/users?page=' + page);
+  getUsers(page: number, options: any){
+    return this.http.post(environment.url.base_url+'/api/users?page=' + page, options);
   }
 
   storeUser(user: any): Observable<any> | void | null{

@@ -116,7 +116,7 @@ export class IndexComponent implements OnInit {
       // called by the grid when more rows are required
       getRows: (params: IGetRowsParams) => {
         // get data for request from server
-        this.roleService.getRoles(this.gridApi.paginationGetCurrentPage() + 1)
+        this.roleService.getRoles(this.gridApi.paginationGetCurrentPage() + 1, params)
           .subscribe((data:any) => {
             params.successCallback( data.data, data.meta.total );
           });
