@@ -18,9 +18,9 @@ import {
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import {GridApi} from "ag-grid-community/dist/lib/gridApi";
-import {DynamicComponentRendererComponent} from "../../../shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-component-renderer.component";
-import {ActionLinkComponent} from "../../../shared/aggrid/action-link/action-link.component";
-import {DynamicCmpConfig} from "../../../shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-cmp-config";
+import {DynamicComponentRendererComponent} from "../../../services/aggrid/dynamic-component/dynamic-component-renderer/dynamic-component-renderer.component";
+import {ActionLinkComponent} from "../../../services/aggrid/action-link/action-link.component";
+import {DynamicCmpConfig} from "../../../services/aggrid/dynamic-component/dynamic-component-renderer/dynamic-cmp-config";
 
 import {NotificationService} from "../../../services/toastr/notification.service";
 import {RolesService} from "../roles.service";

@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule as FM } from '@angular/forms';
 import { AgGridModule} from "ag-grid-angular";
 import { NgSelectModule} from "@ng-select/ng-select";
+import {DirectivesModule} from "../../directives/directives/directives.module";
 
 // CoreUI Modules
 import {
@@ -77,15 +78,16 @@ import { EditComponent } from './edit/edit.component';
     DocsComponentsModule,
     AgGridModule,
     FM,
-    NgSelectModule
+    NgSelectModule,
+    DirectivesModule
   ],
-  declarations: [
-    UsersComponent,
-    CreateComponent,
-    EditComponent
-  ],
+    declarations: [
+        UsersComponent,
+        CreateComponent,
+        EditComponent,
+    ],
   providers: [
-    UsersService
+    UsersService,
   ]
 })
 export class UsersModule {}

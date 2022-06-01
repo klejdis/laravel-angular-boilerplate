@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ToastrModule} from "ngx-toastr";
+import {DirectivesModule} from "./directives/directives/directives.module";
 
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -48,9 +49,9 @@ import {
 } from '@coreui/angular';
 
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
-import { DynamicComponentRendererComponent } from './shared/aggrid/dynamic-component/dynamic-component-renderer/dynamic-component-renderer.component';
-import { ActionLinkComponent } from './shared/aggrid/action-link/action-link.component';
-import {DynamicCmpHostDirective} from "./shared/aggrid/dynamic-component/dynamic-cmp-host/dynamic-cmp-host.directive";
+import { DynamicComponentRendererComponent } from './services/aggrid/dynamic-component/dynamic-component-renderer/dynamic-component-renderer.component';
+import { ActionLinkComponent } from './services/aggrid/action-link/action-link.component';
+import {DynamicCmpHostDirective} from "./services/aggrid/dynamic-component/dynamic-cmp-host/dynamic-cmp-host.directive";
 import {JwtInterceptorService} from "./services/jwt-intereptor/jwt-interceptor.service";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -69,7 +70,9 @@ const APP_CONTAINERS = [
     ...APP_CONTAINERS,
     DynamicComponentRendererComponent,
     ActionLinkComponent,
-    DynamicCmpHostDirective
+    DynamicCmpHostDirective,
+  ],
+  exports:[
   ],
   imports: [
     BrowserModule,
@@ -106,7 +109,8 @@ const APP_CONTAINERS = [
       DynamicComponentRendererComponent
     ]),
     NgSelectModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    DirectivesModule
   ],
   providers: [
     {
