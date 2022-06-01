@@ -1,4 +1,5 @@
 import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Directive({
   selector: '[appCan]'
@@ -8,17 +9,22 @@ export class CanDirective {
 
   constructor(
     private templateRef: TemplateRef<any>,
-    private viewContainer: ViewContainerRef
+    private viewContainer: ViewContainerRef,
+    private authService: AuthService
   ) { }
 
-  @Input() set appCan(condition: { permission:string }) {
-    console.log(condition)
+  @Input() set appCan(permission: { permission:string }) {
 
-    if (!condition) {
-      this.viewContainer.createEmbeddedView(this.templateRef);
-    } else if (condition) {
-      //this.viewContainer.clear();
-    }
+    this.authService.can(permission.permission).then(r=>{
+      if ( r ) {
+        this.viewContainer.createEmbeddedView(this.templateRef);
+      } else {
+        this.viewContainer.clear();
+      }
+    })
+
+
+
   }
 
 }

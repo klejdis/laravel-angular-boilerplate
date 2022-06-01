@@ -12,7 +12,7 @@ export class BaseClientService {
   get_url:string = '';
 
   constructor(
-    private http: HttpClient
+    protected http: HttpClient
   ) { }
 
   get(){

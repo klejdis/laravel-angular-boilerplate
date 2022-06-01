@@ -5,6 +5,7 @@ import {MustMatch} from "../../../_helpers/must-match.validator";
 import {RolesService} from "../../roles/roles.service";
 import {NotificationService} from "../../../services/toastr/notification.service";
 import {PermissionService} from "../../../services/permissions/permission.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-create-edit',
@@ -32,7 +33,8 @@ export class CreateEditComponent implements OnInit{
     private fb: FormBuilder,
     private route: Router,
     private toastr: NotificationService,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private auth: AuthService
   ) {
     this.id = this.activatedRoute.snapshot.params['id'];
   }
@@ -98,6 +100,8 @@ export class CreateEditComponent implements OnInit{
           next: (data: any) => {
             if (data.errors == false){
               this.toastr.showSuccess(data.message, '');
+              this.auth.refresh();
+
               this.route.navigate(['/roles/index']);
             }else{
               this.toastr.showError(data?.message, '');
@@ -118,7 +122,11 @@ export class CreateEditComponent implements OnInit{
           next: (data: any) => {
             if (data.errors == false){
               this.toastr.showSuccess(data.message, '');
+
+              this.auth.refresh();
+
               this.route.navigate(['/roles/index']);
+
             }else{
               this.toastr.showError(data?.message, '');
             }

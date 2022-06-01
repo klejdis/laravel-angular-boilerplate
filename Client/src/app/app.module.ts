@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ToastrModule} from "ngx-toastr";
 import {DirectivesModule} from "./directives/directives/directives.module";
+import {AuthModule} from "./services/auth/auth.module";
 
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -110,7 +111,8 @@ const APP_CONTAINERS = [
     ]),
     NgSelectModule,
     ToastrModule.forRoot(),
-    DirectivesModule
+    DirectivesModule,
+    AuthModule.forRoot()
   ],
   providers: [
     {
@@ -127,7 +129,7 @@ const APP_CONTAINERS = [
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptorService,
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })

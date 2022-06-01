@@ -22,20 +22,16 @@ export class LoginComponent {
     private router: Router
   ) { }
 
-  onSubmit() {
+  async onSubmit() {
 
-    this.authService.login(
-      this.loginForm?.value.email,
-      this.loginForm?.value.password,
-      ).subscribe({
-      next: (data: any) => {
-        localStorage.setItem('access_token', data.data);
-        this.router.navigate(['/dashboard']);
-      },
-      error: (data: any) => {
-
-      }
-    });
+    if (
+      await this.authService.login(
+        this.loginForm?.value.email,
+        this.loginForm?.value.password
+      )
+    ) {
+      this.router.navigate(['/dashboard']);
+    }
 
 
   }
