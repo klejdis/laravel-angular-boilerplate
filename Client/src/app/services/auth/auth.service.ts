@@ -37,17 +37,12 @@ export class AuthService {
   }
 
   async authenticate(e: string, p: string): Promise<boolean>{
-    await this.http.post(environment.url.base_url + '/api/login', {
+    const data = <any>await firstValueFrom(this.http.post(environment.url.base_url + '/api/login', {
       email: e,
       password: p,
-    }).subscribe({
-      next: (data: any) => {
-        localStorage.setItem('access_token', data.data);
-      },
-      error: (data: any) => {
+    }));
 
-      }
-    });
+    localStorage.setItem('access_token', data.data);
 
     return localStorage.getItem('access_token') !==  null ;
   }
@@ -61,8 +56,6 @@ export class AuthService {
   }
 
    async can(permission: string): Promise<boolean> {
-    console.log(this.permissions)
-
      if (this.permissions == undefined) {
        let data = <any>await firstValueFrom(this.permissionService.getUserPermissions());
        this.permissions = data.data;

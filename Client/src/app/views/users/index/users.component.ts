@@ -18,6 +18,7 @@ import {DynamicComponentRendererComponent} from "../../../services/aggrid/dynami
 import {ActionLinkComponent} from "../../../services/aggrid/action-link/action-link.component";
 import {DynamicCmpConfig} from "../../../services/aggrid/dynamic-component/dynamic-component-renderer/dynamic-cmp-config";
 import {NotificationService} from "../../../services/toastr/notification.service";
+import {AuthService} from "../../../services/auth/auth.service";
 
 @Injectable()
 @Component({
@@ -27,6 +28,7 @@ import {NotificationService} from "../../../services/toastr/notification.service
   providers: [IconSetService],
 })
 export class UsersComponent implements OnInit {
+
 
   public icons!: [string, string[]][];
 
@@ -110,7 +112,8 @@ export class UsersComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private userService: UsersService,
     public iconSet: IconSetService,
-    private toastr: NotificationService
+    private toastr: NotificationService,
+    private auth: AuthService
   ) {
     iconSet.icons = { cilPlus };
   }
@@ -119,7 +122,11 @@ export class UsersComponent implements OnInit {
   }
 
   onGridReady(params: GridReadyEvent) {
-    this.loadGridData(params);
+    this.auth.can('browse-users').then(r => {
+      if (r){
+        this.loadGridData(params);
+      }
+    })
   }
 
   loadGridData(params: GridReadyEvent){

@@ -22,17 +22,16 @@ export class LoginComponent {
     private router: Router
   ) { }
 
-  async onSubmit() {
+  onSubmit() {
 
-    if (
-      await this.authService.login(
-        this.loginForm?.value.email,
-        this.loginForm?.value.password
-      )
-    ) {
-      this.router.navigate(['/dashboard']);
-    }
-
+    this.authService.login(
+      this.loginForm?.value.email,
+      this.loginForm?.value.password
+    ).then(r => {
+      if (r) {
+        this.router.navigate(['/dashboard']);
+      }
+    });
 
   }
 }
