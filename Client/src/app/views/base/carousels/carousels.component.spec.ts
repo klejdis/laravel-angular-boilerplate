@@ -6,7 +6,7 @@ import { CardModule, CarouselModule, GridModule } from '@coreui/angular';
 import { IconModule } from '@coreui/icons-angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
-import { DocsComponentsModule } from '../../../../components';
+import { DocsComponentsModule } from '../../../../components/docs';
 import { CarouselsComponent } from './carousels.component';
 
 describe('CarouselsComponent', () => {

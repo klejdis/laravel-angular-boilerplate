@@ -36,6 +36,7 @@
     "ag-grid-community": "^27.2.1",
     "ag-grid-enterprise": "^27.2.1",
     "chart.js": "^3.7.1",
+    "ng-http-loader": "^11.0.1",
     "ngx-perfect-scrollbar": "^10.1.1",
     "ngx-toastr": "^14.3.0",
     "rxjs": "~7.5.0",

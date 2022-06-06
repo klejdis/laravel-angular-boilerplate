@@ -5,7 +5,7 @@ import { CardModule, DropdownModule, GridModule, NavModule } from '@coreui/angul
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
 import { NavsComponent } from './navs.component';
-import { DocsComponentsModule } from '../../../../components';
+import { DocsComponentsModule } from '../../../../components/docs';
 
 describe('NavsComponent', () => {
   let component: NavsComponent;

@@ -1,9 +1,8 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
 import { Injectable} from "@angular/core";
 import { DomSanitizer } from '@angular/platform-browser';
-import { IconSetService } from '@coreui/icons-angular';
-import {cilPlus, cilPencil} from '@coreui/icons';
 import {UsersService} from "../users.service";
+
 //ag grid
 import {
   ColDef,
@@ -25,12 +24,8 @@ import {AuthService} from "../../../services/auth/auth.service";
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
-  providers: [IconSetService],
 })
 export class UsersComponent implements OnInit {
-
-
-  public icons!: [string, string[]][];
 
   public columnDefs: ColDef[] = [
     { field: 'id',
@@ -111,11 +106,9 @@ export class UsersComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
     private userService: UsersService,
-    public iconSet: IconSetService,
     private toastr: NotificationService,
     private auth: AuthService
   ) {
-    iconSet.icons = { cilPlus };
   }
 
   ngOnInit() {

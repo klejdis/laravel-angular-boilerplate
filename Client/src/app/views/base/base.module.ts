@@ -31,7 +31,7 @@ import {
 import { IconModule } from '@coreui/icons-angular';
 
 // utils
-import { DocsComponentsModule } from '@docs-components/docs-components.module';
+import { DocsComponentsModule } from '../../../components/docs/docs-components.module';
 
 // views
 import { AccordionsComponent } from './accordion/accordions.component';

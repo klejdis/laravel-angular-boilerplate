@@ -39,7 +39,7 @@ import {
 import { IconModule } from '@coreui/icons-angular';
 
 // utils
-import { DocsComponentsModule } from '@docs-components/docs-components.module';
+import { DocsComponentsModule } from '../../../components/docs/docs-components.module';
 import { CreateEditComponent } from './create-edit/create-edit.component';
 
 

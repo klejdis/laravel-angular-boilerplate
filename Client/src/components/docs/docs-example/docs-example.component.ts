@@ -7,7 +7,7 @@ import {
   Input
 } from '@angular/core';
 
-import packageJson from '../../../package.json';
+import packageJson from '../../../../package.json';
 
 @Component({
   selector: 'app-docs-example',

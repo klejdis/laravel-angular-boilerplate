@@ -5,7 +5,7 @@ import { CardModule, GridModule, TableModule, UtilitiesModule } from '@coreui/an
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
 import { TablesComponent } from './tables.component';
-import { DocsComponentsModule } from '../../../../components';
+import { DocsComponentsModule } from '../../../../components/docs';
 
 describe('TablesComponent', () => {
   let component: TablesComponent;

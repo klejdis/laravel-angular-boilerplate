@@ -5,7 +5,7 @@ import { ButtonModule, CardModule, DropdownModule, FormModule, GridModule } from
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
 import { InputGroupsComponent } from './input-groups.component';
-import { DocsComponentsModule } from '../../../../components';
+import { DocsComponentsModule } from '../../../../components/docs';
 
 describe('InputGroupsComponent', () => {
   let component: InputGroupsComponent;

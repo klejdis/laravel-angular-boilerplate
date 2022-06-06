@@ -14,7 +14,7 @@ import {
 } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
-import { DocsComponentsModule } from '../../../../components';
+import { DocsComponentsModule } from '../../../../components/docs';
 import { DropdownsComponent } from './dropdowns.component';
 
 describe('DropdownsComponent', () => {

@@ -35,7 +35,7 @@ import {
 import { IconModule } from '@coreui/icons-angular';
 
 // utils
-import { DocsComponentsModule } from '@docs-components/docs-components.module';
+import { DocsComponentsModule } from '../../../components/docs/docs-components.module';
 
 // views
 import {UsersComponent} from "./index/users.component";
@@ -45,6 +45,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import {UsersService} from "./users.service";
 import { CreateComponent } from './create/create.component';
 import { EditComponent } from './edit/edit.component';
+import {AgSearchBoxModule} from "../../components/ag-searchbox/ag-search-box.module";
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { EditComponent } from './edit/edit.component';
     AgGridModule,
     FM,
     NgSelectModule,
-    DirectivesModule
+    DirectivesModule,
+    AgSearchBoxModule
   ],
     declarations: [
         UsersComponent,

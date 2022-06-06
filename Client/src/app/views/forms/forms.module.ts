@@ -13,7 +13,7 @@ import {
   SharedModule
 } from '@coreui/angular';
 
-import { DocsComponentsModule } from '@docs-components/docs-components.module';
+import { DocsComponentsModule } from '../../../components/docs/docs-components.module';
 
 import { FormsRoutingModule } from './forms-routing.module';
 import { RangesComponent } from './ranges/ranges.component';

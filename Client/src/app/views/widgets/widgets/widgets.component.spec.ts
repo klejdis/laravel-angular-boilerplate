@@ -5,7 +5,7 @@ import { CardModule, GridModule, ProgressModule, WidgetModule } from '@coreui/an
 import { ChartjsModule } from '@coreui/angular-chartjs';
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
-import { DocsComponentsModule } from '../../../../components';
+import { DocsComponentsModule } from '../../../../components/docs';
 import { WidgetsBrandComponent } from '../widgets-brand/widgets-brand.component';
 import { WidgetsDropdownComponent } from '../widgets-dropdown/widgets-dropdown.component';
 import { WidgetsEComponent } from '../widgets-e/widgets-e.component';

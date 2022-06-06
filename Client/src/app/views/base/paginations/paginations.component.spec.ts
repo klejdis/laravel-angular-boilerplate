@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { CardModule, GridModule, PaginationModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from '../../../icons/icon-subset';
-import { DocsComponentsModule } from '../../../../components';
+import { DocsComponentsModule } from '../../../../components/docs';
 import { PaginationsComponent } from './paginations.component';
 
 describe('PaginationsComponent', () => {

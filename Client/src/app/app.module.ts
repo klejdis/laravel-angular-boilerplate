@@ -54,6 +54,8 @@ import { DynamicComponentRendererComponent } from './services/aggrid/dynamic-com
 import { ActionLinkComponent } from './services/aggrid/action-link/action-link.component';
 import {DynamicCmpHostDirective} from "./services/aggrid/dynamic-component/dynamic-cmp-host/dynamic-cmp-host.directive";
 import {JwtInterceptorService} from "./services/jwt-intereptor/jwt-interceptor.service";
+import {NgHttpLoaderModule} from "ng-http-loader";
+import {AgSearchBoxModule} from "./components/ag-searchbox/ag-search-box.module";
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -112,7 +114,9 @@ const APP_CONTAINERS = [
     NgSelectModule,
     ToastrModule.forRoot(),
     DirectivesModule,
-    AuthModule.forRoot()
+    AuthModule.forRoot(),
+    NgHttpLoaderModule.forRoot(),
+    AgSearchBoxModule
   ],
   providers: [
     {
