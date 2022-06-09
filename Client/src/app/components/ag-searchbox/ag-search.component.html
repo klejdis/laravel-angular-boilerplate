@@ -1,9 +1,11 @@
 <div class="input-group">
   <input type="text"
          class="form-control"
-         placeholder="Search ... "
+         [placeholder]="placeholder"
+         [style]="{'width': '400px'}"
+         (input)="onKeypress($event)"
   >
-  <span class="input-group-text">
+  <button class="input-group-text">
       <svg cIcon name="cilSearch"></svg>
-  </span>
+  </button>
 </div>

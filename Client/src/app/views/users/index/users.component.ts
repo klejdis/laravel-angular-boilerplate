@@ -27,6 +27,8 @@ import {AuthService} from "../../../services/auth/auth.service";
 })
 export class UsersComponent implements OnInit {
 
+  placeholder:string = "Search Users";
+
   public columnDefs: ColDef[] = [
     { field: 'id',
       headerName: 'Id',

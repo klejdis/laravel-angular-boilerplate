@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {$e} from "@angular/compiler/src/chars";
 
 @Component({
   selector: 'app-ag-search',
@@ -7,6 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgSearchComponent implements OnInit {
 
+  @Output() onInput = new EventEmitter<any>();
+
+  @Input()
+  placeholder: string;
+
   constructor(
   ) {
   }
@@ -14,4 +20,7 @@ export class AgSearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onKeypress($event: any) {
+    this.onInput.emit($event);
+  }
 }
