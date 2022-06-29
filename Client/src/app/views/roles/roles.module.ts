@@ -41,6 +41,7 @@ import { IconModule } from '@coreui/icons-angular';
 // utils
 import { DocsComponentsModule } from '../../../components/docs/docs-components.module';
 import { CreateEditComponent } from './create-edit/create-edit.component';
+import {AgSearchBoxModule} from "../../components/ag-searchbox/ag-search-box.module";
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { CreateEditComponent } from './create-edit/create-edit.component';
     DocsComponentsModule,
     AgGridModule,
     FM,
-    NgSelectModule
+    NgSelectModule,
+    AgSearchBoxModule
   ],
   providers: [
     RolesService

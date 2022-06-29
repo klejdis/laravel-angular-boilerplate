@@ -3,9 +3,9 @@
          class="form-control"
          [placeholder]="placeholder"
          [style]="{'width': '400px'}"
-         (input)="onKeypress($event)"
+         (input)="onInputHandler($event)"
   >
-  <button class="input-group-text">
+  <button class="input-group-text" (click)="onSearchHandler($event)">
       <svg cIcon name="cilSearch"></svg>
   </button>
 </div>

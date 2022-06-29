@@ -94,6 +94,10 @@ export class IndexComponent implements OnInit {
 
   private gridApi: GridApi;
 
+  public placeholder:string = "Search Roles";
+  private searchTerm: string;
+
+
   constructor(
     private roleService: RolesService,
     private toastr: NotificationService,
@@ -116,7 +120,10 @@ export class IndexComponent implements OnInit {
       // called by the grid when more rows are required
       getRows: (params: IGetRowsParams) => {
         // get data for request from server
-        this.roleService.getRoles(this.gridApi.paginationGetCurrentPage() + 1, params)
+        this.roleService.getRoles(this.gridApi.paginationGetCurrentPage() + 1, {
+          params: params,
+          search: this.searchTerm
+        })
           .subscribe((data:any) => {
             params.successCallback( data.data, data.meta.total );
           });
@@ -144,5 +151,13 @@ export class IndexComponent implements OnInit {
 
   }
 
+  onSearch($event: any) {
+    this.gridApi.refreshInfiniteCache();
+  }
+
+  onInput(term: string) {
+    this.searchTerm = term;
+    this.gridApi.refreshInfiniteCache();
+  }
 
 }

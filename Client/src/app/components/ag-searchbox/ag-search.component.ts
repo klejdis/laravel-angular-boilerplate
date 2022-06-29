@@ -8,10 +8,10 @@ import {$e} from "@angular/compiler/src/chars";
 })
 export class AgSearchComponent implements OnInit {
 
-  @Output() onInput = new EventEmitter<any>();
+  @Output() onInput = new EventEmitter<string>();
+  @Output() onSearch = new EventEmitter<any>();
 
-  @Input()
-  placeholder: string;
+  @Input() placeholder: string;
 
   constructor(
   ) {
@@ -20,7 +20,11 @@ export class AgSearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onKeypress($event: any) {
-    this.onInput.emit($event);
+  onInputHandler($event: any) {
+    this.onInput.emit($event.target.value);
+  }
+
+  onSearchHandler($event: MouseEvent) {
+    this.onSearch.emit($event);
   }
 }

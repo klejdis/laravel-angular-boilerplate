@@ -5,7 +5,8 @@
       <div class="mx-1">
         <app-ag-search
           [placeholder]=placeholder
-
+          (onInput)="onInput($event)"
+          (onSearch)="onSearch($event)"
         ></app-ag-search>
       </div>
 

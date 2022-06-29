@@ -11,7 +11,8 @@ export class CanDirective {
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
     private authService: AuthService
-  ) { }
+  ) {
+  }
 
   @Input() set appCan(permission: { permission:string }) {
 
@@ -22,8 +23,6 @@ export class CanDirective {
         this.viewContainer.clear();
       }
     })
-
-
 
   }
 

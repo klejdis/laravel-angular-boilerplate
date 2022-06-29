@@ -1,7 +1,13 @@
 <div class="fade-in">
   <c-row ngPreserveWhitespace [gutter]="{gy: 2}">
     <c-col class="d-flex justify-content-end" xs="12">
-
+      <div class="mx-1">
+        <app-ag-search
+          [placeholder]=placeholder
+          (onInput)="onInput($event)"
+          (onSearch)="onSearch($event)"
+        ></app-ag-search>
+      </div>
       <a cButton class="me-1" color="primary" variant="outline" routerLink="/roles/create">
         <svg cIcon name="cilPlus"  title=""></svg>
         Create Role

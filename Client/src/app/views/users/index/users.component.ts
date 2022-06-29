@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit} from '@angular/core';
 import { Injectable} from "@angular/core";
 import { DomSanitizer } from '@angular/platform-browser';
 import {UsersService} from "../users.service";
+import { ComponentPortal } from "@angular/cdk/portal";
 
 //ag grid
 import {
@@ -18,6 +19,7 @@ import {ActionLinkComponent} from "../../../services/aggrid/action-link/action-l
 import {DynamicCmpConfig} from "../../../services/aggrid/dynamic-component/dynamic-component-renderer/dynamic-cmp-config";
 import {NotificationService} from "../../../services/toastr/notification.service";
 import {AuthService} from "../../../services/auth/auth.service";
+import {temporaryAllocator} from "@angular/compiler/src/render3/view/util";
 
 @Injectable()
 @Component({
@@ -104,6 +106,7 @@ export class UsersComponent implements OnInit {
   public rowData!: any[];
 
   private gridApi: GridApi;
+  private searchTerm: string;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -132,7 +135,8 @@ export class UsersComponent implements OnInit {
       getRows: (params: IGetRowsParams) => {
         // get data for request from server
         this.userService.getUsers(this.gridApi.paginationGetCurrentPage() + 1,{
-          params: params
+          params: params,
+          search: this.searchTerm
         })
           .subscribe((data:any) => {
             params.successCallback( data.data, data.meta.total );
@@ -161,5 +165,13 @@ export class UsersComponent implements OnInit {
 
   }
 
+  onSearch($event: any) {
+    this.gridApi.refreshInfiniteCache();
+  }
+
+  onInput(term: string) {
+    this.searchTerm = term;
+    this.gridApi.refreshInfiniteCache();
+  }
 }
 
