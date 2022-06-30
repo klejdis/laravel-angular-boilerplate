@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Injectable} from "@angular/core";
 import { DomSanitizer } from '@angular/platform-browser';
-import { IconSetService } from '@coreui/icons-angular';
-import {cilPlus, cilPencil} from '@coreui/icons';
+
 //ag grid
 import {
   CheckboxSelectionCallbackParams,
@@ -30,10 +29,8 @@ import {RolesService} from "../roles.service";
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
-  providers: [IconSetService],
 })
 export class IndexComponent implements OnInit {
-  public icons!: [string, string[]][];
   public columnDefs: ColDef[] = [
     { field: 'id', headerName: 'Id' },
     { field: 'name', headerName: 'Name' },
@@ -52,14 +49,14 @@ export class IndexComponent implements OnInit {
                 data: {
                   data:  param.data,
                   routerLink: ['/roles', param.data?.id, 'edit'],
-                  icon: 'cilPencil',
+                  icon: 'cil-pencil',
                 }
               },
               {
                 component: ActionLinkComponent,
                 data: {
                   data:  param.data,
-                  icon: 'cilTrash',
+                  icon: 'cil-trash',
                   confirm: true,
                   listeners:{
                     handleClick: (component: DynamicComponentRendererComponent) => {
@@ -101,10 +98,8 @@ export class IndexComponent implements OnInit {
   constructor(
     private roleService: RolesService,
     private toastr: NotificationService,
-    public iconSet: IconSetService,
     private sanitizer: DomSanitizer,
   ) {
-    iconSet.icons = { cilPlus };
   }
 
   ngOnInit(): void {

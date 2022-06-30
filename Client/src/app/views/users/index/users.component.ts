@@ -2,7 +2,6 @@ import {Component, EventEmitter, OnInit} from '@angular/core';
 import { Injectable} from "@angular/core";
 import { DomSanitizer } from '@angular/platform-browser';
 import {UsersService} from "../users.service";
-import { ComponentPortal } from "@angular/cdk/portal";
 
 //ag grid
 import {
