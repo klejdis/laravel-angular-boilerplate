@@ -123,6 +123,11 @@
       <excludeFolder url="file://$MODULE_DIR$/Server/vendor/spatie/laravel-ignition" />
       <excludeFolder url="file://$MODULE_DIR$/Server/vendor/guzzlehttp/guzzle" />
       <excludeFolder url="file://$MODULE_DIR$/Server/vendor/laracasts/presenter" />
+      <excludeFolder url="file://$MODULE_DIR$/Server/vendor/symfony/uid" />
+      <excludeFolder url="file://$MODULE_DIR$/Server/vendor/symfony/polyfill-uuid" />
+      <excludeFolder url="file://$MODULE_DIR$/Server/vendor/symfony/yaml" />
+      <excludeFolder url="file://$MODULE_DIR$/Server/vendor/guzzlehttp/uri-template" />
+      <excludeFolder url="file://$MODULE_DIR$/Server/vendor/nunomaduro/termwind" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

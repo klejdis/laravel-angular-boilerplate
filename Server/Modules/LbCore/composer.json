@@ -1,0 +1,32 @@
+{
+    "name": "klejdis/lb-core-module",
+    "type": "laravel-module",
+    "description": "",
+    "authors": [
+        {
+            "name": "klejdis jorgji",
+            "email": ""
+        }
+    ],
+    "require": {
+        "php": "^8.0.2",
+        "cartalyst/sentinel": "^6.0",
+        "laravel/sanctum": "^2.14.1",
+        "laracasts/presenter": "^0.2.4",
+        "fakerphp/faker": "^1.9.1"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\LBCore\\": ""
+        }
+    },
+    "minimum-stability": "dev"
+}

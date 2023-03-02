@@ -116,6 +116,11 @@
       <path value="$PROJECT_DIR$/Server/vendor/spatie/laravel-ignition" />
       <path value="$PROJECT_DIR$/Server/vendor/guzzlehttp/guzzle" />
       <path value="$PROJECT_DIR$/Server/vendor/laracasts/presenter" />
+      <path value="$PROJECT_DIR$/Server/vendor/symfony/uid" />
+      <path value="$PROJECT_DIR$/Server/vendor/symfony/polyfill-uuid" />
+      <path value="$PROJECT_DIR$/Server/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/Server/vendor/guzzlehttp/uri-template" />
+      <path value="$PROJECT_DIR$/Server/vendor/nunomaduro/termwind" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />
